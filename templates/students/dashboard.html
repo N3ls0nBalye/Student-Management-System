@@ -3,29 +3,35 @@
 <h2>Students</h2>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-<a class="btn btn-primary mb-3" href="{% url 'student_create' %}">Add Student</a>
+  <a class="btn btn-primary mb-3" href="{% url 'student_create' %}">Add Student</a>
   <a class="btn btn-success" href="{% url 'subject_add' %}">➕ Add Subject</a>
 </div>
 
-<table class="table table-striped">
-  <thead><tr><th>Name</th><th>Email</th><th>Year</th><th>Actions</th></tr></thead>
-  <tbody>
-  {% for student in students %}
-  <tr>
-    <td>{{ student.name }}</td>
-    <td>{{ student.email }}</td>
-    <td>{{ student.year_level }}</td>
-    <td class="d-flex gap-1">
-      <a href="{% url 'student_detail' student.id %}" class="btn btn-sm btn-info">View</a>
-      <form action="{% url 'student_delete' student.id %}" method="post" onsubmit="return confirm('Delete {{ student.name }}?');">
-        {% csrf_token %}
-        <button class="btn btn-sm btn-danger">Delete</button>
-      </form>
-    </td>
-  </tr>
-  {% endfor %}
-</tbody>
-</table>
+<div class="container mt-4">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr><th>Name</th><th>Email</th><th>Year</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        {% for student in students %}
+        <tr>
+          <td>{{ student.name }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.year_level }}</td>
+          <td class="d-flex flex-wrap gap-1">
+            <a href="{% url 'student_detail' student.id %}" class="btn btn-sm btn-info" style="min-width: 70px;">View</a>
+            <form action="{% url 'student_delete' student.id %}" method="post" onsubmit="return confirm('Delete {{ student.name }}?');">
+              {% csrf_token %}
+              <button class="btn btn-sm btn-danger" style="min-width: 70px;">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <h4 class="mt-5">Subjects</h4>
 <table class="table table-bordered">
@@ -41,11 +47,11 @@
     <tr>
       <td>{{ subject.code }}</td>
       <td>{{ subject.title }}</td>
-      <td>
-        <a href="{% url 'subject_update' subject.id %}" class="btn btn-sm btn-warning">Edit</a>
+      <td class="d-flex flex-wrap gap-1">
+        <a href="{% url 'subject_update' subject.id %}" class="btn btn-sm btn-warning" style="min-width: 70px;">Edit</a>
         <form action="{% url 'subject_delete' subject.id %}" method="post" style="display:inline;">
           {% csrf_token %}
-          <button class="btn btn-sm btn-danger" onclick="return confirm('Delete subject {{ subject.title }}?');">Delete</button>
+          <button class="btn btn-sm btn-danger" onclick="return confirm('Delete subject {{ subject.title }}?');" style="min-width: 70px;">Delete</button>
         </form>
       </td>
     </tr>
