@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Add Subject</h2>
+
+<form method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="id_code">Subject Code:</label>
+    {{ form.code }}
+  </div>
+  <div class="mb-3">
+    <label for="id_title">Subject Title:</label>
+    {{ form.title }}
+  </div>
+
+  <button type="submit" class="btn btn-success">Save</button>
+  <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+</form>
+
+{% endblock %}

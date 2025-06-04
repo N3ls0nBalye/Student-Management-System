@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ student.name }} (Year {{ student.year_level }})</h2>
+<p>Email: {{ student.email }}</p>
+
+<h4>Subjects & Grades</h4>
+<table class="table table-striped">
+  <thead>
+    <tr><th>Subject</th><th>Activity</th><th>Quiz</th><th>Exam</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    {% for grade in grades %}
+    <tr>
+      <td>{{ grade.subject.title }}</td>
+      <td>{{ grade.activity }}</td>
+      <td>{{ grade.quiz }}</td>
+      <td>{{ grade.exam }}</td>
+      <td><a href="{% url 'grade_edit' grade.id %}" class="btn btn-sm btn-secondary">Edit</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if student and student.id %}
+  <a href="{% url 'grade_add' student.id %}">Add Grade</a>
+{% endif %}{% endblock %}
