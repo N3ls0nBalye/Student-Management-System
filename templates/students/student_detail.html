@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<style>
+  .action-btn {
+    min-width: 80px;
+    text-align: center;
+  }
+</style>
+
 <br>
 <a href="{% url 'dashboard' %}" class="btn btn-secondary">← Back</a>
-<br>
-<br>
+<br><br>
 
 <h2>{{ student.name }}</h2>
 <p>Email: {{ student.email }}</p>
@@ -30,11 +36,11 @@
       <td>{{ grade.activity }}</td>
       <td>{{ grade.quiz }}</td>
       <td>{{ grade.exam }}</td>
-      <td>
-        <a href="{% url 'grade_edit' grade.id %}" class="btn btn-sm btn-warning">Edit</a>
-        <form action="{% url 'grade_delete' grade.id %}" method="post" style="display:inline;">
+      <td class="d-flex flex-wrap gap-2">
+        <a href="{% url 'grade_edit' grade.id %}" class="btn btn-sm btn-warning action-btn">Edit</a>
+        <form action="{% url 'grade_delete' grade.id %}" method="post">
           {% csrf_token %}
-          <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this grade?');">Delete</button>
+          <button type="submit" class="btn btn-sm btn-danger action-btn" onclick="return confirm('Are you sure you want to delete this grade?');">Delete</button>
         </form>
       </td>
     </tr>
